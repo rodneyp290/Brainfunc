@@ -2,6 +2,7 @@ module Execution where
 
 import Data.Char (ord,chr)
 import Data.Bool (bool)
+import System.IO
 
 import Zipper
 import Tape
@@ -60,6 +61,7 @@ instruction Read code tape =
 instruction Write code tape =
   do
     putStr "λ> " 
+    hFlush stdout
     x <- getChar
     pure (code, writeReg (toInteger (ord x)) tape)
 instruction Open code tape =
