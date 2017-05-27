@@ -69,7 +69,7 @@ process code tape =
   case cursorSafe code of
     Nothing -> Tape
     Just term -> do
-      (code' tape') <- instruction term code tape
+      (code', tape') <- instruction term code tape
       case (nextSafe code') of
         Nothing -> pure () -- Just ()?
         Just code'' -> process code'' tape
