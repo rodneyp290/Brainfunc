@@ -7,22 +7,22 @@ data Term =
 
 type Code = Zipper Term
 
-closeBackward :: Code -> Code
-closeBackward code = backward 0 code
-  where backward :: Integer -> Code -> Code
-        backward 0 code =
+openForward :: Code -> Code
+openForward code = forward 0 code
+  where forward :: Integer -> Code -> Code
+        forward 0 code =
           case cursorSafe code of
             Just Close -> code
-            Just Open -> backward 1 (nextReg code)
-            Just _ -> backward 0 (nextReg code)
+            Just Open -> forward 1 (nextReg code)
+            Just _ -> forward 0 (nextReg code)
             Nothing -> error "You've been brainfunced!"
-        backward n code =
+        forward n code =
           case cursorSafe code of
-            Just Close -> backward (n-1) code
-            Just Open -> backward (n+1) code
-            Just _ -> backward n code
+            Just Close -> forward (n-1) code
+            Just Open -> forward (n+1) code
+            Just _ -> forward n code
             Nothing -> error "You've been brainfunced!"
-        backward n Nothing =
+        forward n Nothing =
           error "You've been brainfunced!"
 
 
