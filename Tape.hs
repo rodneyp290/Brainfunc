@@ -10,7 +10,7 @@ alterReg f tape  = replace (f (readReg tape)) tape
 incrReg :: Tape -> Tape
 incrReg t = alterReg incr t
   where incr :: Integer -> Integer
-        incr n = n - 1
+        incr n = n + 1
 
 decrReg :: Tape -> Tape
 decrReg t = alterReg decr t
