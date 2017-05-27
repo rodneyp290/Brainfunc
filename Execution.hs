@@ -25,9 +25,9 @@ openForward code = forward 0 (nextSafe code)
             Just Close -> forward (n-1) (nextSafe code')
             Just Open -> forward (n+1) (nextSafe code')
             Just _ -> forward n (nextSafe code')
-            Nothing -> error "You've been brainfunced!"
+            Nothing -> error "You've been doubling brainfunced!"
         forward _ Nothing =
-          error "You've been brainfunced!"
+          error "You've been bbbbbrrrraaaiinffffffuuuuunnnnccceed!"
 
 
 closeBackward :: Code -> Code
@@ -38,15 +38,15 @@ closeBackward code = backward 0 (Just code)
             Just Close -> backward 1 (nextSafe code')
             Just Open -> code'
             Just _ -> backward 0 (nextSafe code')
-            Nothing -> error "You've been brainfunced!"
+            Nothing -> error "You've been reverse brainfunced!"
         backward n (Just code') =
           case cursorSafe code' of
             Just Close -> backward (n+1) (nextSafe code')
             Just Open -> backward (n-1) (nextSafe code')
             Just _ -> backward n (nextSafe code')
-            Nothing -> error "You've been brainfunced!"
+            Nothing -> error "You've been doubling reverse brainfunced!"
         backward _ Nothing =
-          error "You've been brainfunced!"
+          error "You've been reverse bbbbbrrrraaaiinffffffuuuuunnnnccceed!"
 
 instruction :: Term -> Code -> Tape -> IO (Code, Tape)
 instruction Incr code tape = pure (code, incrReg tape)
