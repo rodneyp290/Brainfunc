@@ -1,4 +1,7 @@
 module Execution where
+
+import Data.Char (ord,chr)
+
 import Zipper
 import Tape
 
@@ -51,12 +54,13 @@ instruction Next code tape = pure (code, nextReg tape)
 instruction Prev code tape = pure (code, prevReg tape)
 instruction Read code tape =
   do
-    putStr (readReg tape)
+    putChar (chr ((fromInteger (readReg tape))::Int))
     pure (code, tape)
 instruction Write code tape =
   do
+    putStr "λ> " 
     x <- getChar
-    pure (code, writeReg x tape)
+    pure (code, writeReg (toInteger (ord x)) tape)
 instruction Open code tape =
   pure (closeBackward 0 tape )
 instruction Open code tape =
