@@ -31,19 +31,19 @@ openForward code = forward 0 (nextSafe code)
 
 
 closeBackward :: Code -> Code
-closeBackward code = backward 0 (Just code)
+closeBackward code = backward 0 (prevSafe code)
   where backward :: Integer -> (Maybe Code) -> Code
         backward 0 (Just code') =
           case cursorSafe code' of
-            Just Close -> backward 1 (nextSafe code')
+            Just Close -> backward 1 (prevSafe code')
             Just Open -> code'
-            Just _ -> backward 0 (nextSafe code')
+            Just _ -> backward 0 (prevSafe code')
             Nothing -> error "You've been reverse brainfunced!"
         backward n (Just code') =
           case cursorSafe code' of
-            Just Close -> backward (n+1) (nextSafe code')
-            Just Open -> backward (n-1) (nextSafe code')
-            Just _ -> backward n (nextSafe code')
+            Just Close -> backward (n+1) (prevSafe code')
+            Just Open -> backward (n-1) (prevSafe code')
+            Just _ -> backward n (prevSafe code')
             Nothing -> error "You've been doubling reverse brainfunced!"
         backward _ Nothing =
           error "You've been reverse bbbbbrrrraaaiinffffffuuuuunnnnccceed!"
