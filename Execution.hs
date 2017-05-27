@@ -66,12 +66,12 @@ instruction Open code tape =
 instruction Close code tape =
   pure (closeBackward code, tape)
 
-process :: Code -> Tape -> Tape
+process :: Code -> Tape -> IO (Tape)
 process code tape =
   case cursorSafe code of
-    Nothing -> tape
+    Nothing -> pure (tape)
     Just term -> do
       (code', tape') <- instruction term code tape
       case (nextSafe code') of
-        Nothing -> pure () -- Just ()?
+        Nothing -> pure (tape)
         Just code'' -> process code'' tape
