@@ -33,5 +33,5 @@ insertAfter e Zip = zipper e
 insertAfter e (Zipper l c r) = Zipper l e (c:r)
 
 replace :: a -> Zipper a -> Zipper a
-replace e Zip = error "Can't replace cursor of empty zipper"
+replace _ Zip = error "Can't replace cursor of empty zipper"
 replace e (Zipper l _ r) = Zipper l e r
