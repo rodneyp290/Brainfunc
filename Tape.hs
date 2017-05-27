@@ -4,7 +4,7 @@ import Zipper
 
 type Tape = Zipper Integer
 
-alterReg :: Tape -> Tape
+alterReg :: (a -> Integer) -> Tape -> Tape
 alterReg f tape  =
   case cursorSafe tape of
     Just cursor -> replace (f cursor) tape
@@ -16,7 +16,7 @@ incrReg t = alterReg (+1) t
 decrReg :: Tape -> Tape
 decrReg t = alterReg (-1) t
 
-nextReg :: Tape -> (Maybe Tape)
+nextReg :: Tape -> Tape
 nextReg tape =
   case nextSafe tape of
     Just tape' -> tape'
