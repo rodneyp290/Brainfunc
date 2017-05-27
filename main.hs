@@ -23,7 +23,7 @@ sourceToList source = foldr charToTermList [] source
 main :: IO ()
 main =
   do
-    filepath <- const getArgs
-    source <- readFile filepath
+    --sourceFile <- head getArgs
+    source <- readFile "./hello.bf" --filepath
     process (zipperFromList (sourceToList source)) zipper 0
     
