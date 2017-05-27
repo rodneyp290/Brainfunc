@@ -29,4 +29,11 @@ prevReg tape =
     Nothing -> insertBefore 0 tape
 
 
-readReg :: Tape -> Int
+readReg :: Tape -> Integer
+readReg tape =
+  case cursorSafe tape of
+    Just val -> val
+    Nothing -> error "Tape initialised incorrectly. Empty Tape can not be read."
+
+writeReg :: Integer -> Tape -> Tape
+writeReg = replace
