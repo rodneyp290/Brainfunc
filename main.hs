@@ -1,9 +1,6 @@
 module Main where
 
-import System.Environment
-
 import Zipper
-import Tape
 import Execution
 
 sourceToList :: [Char] -> [Term]
