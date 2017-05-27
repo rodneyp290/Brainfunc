@@ -26,11 +26,11 @@ prevSafe (Zipper (lh:lt) c r) = Just (Zipper lt lh (c:r) )
 
 insertBefore :: a -> Zipper a -> Zipper a
 insertBefore e Zip = zipper e
-insertBefore e (Zipper l c r) = Zipper (c:l) e r
+insertBefore e (Zipper l c r) = Zipper l e (c:r)
 
 insertAfter :: a -> Zipper a -> Zipper a
 insertAfter e Zip = zipper e
-insertAfter e (Zipper l c r) = Zipper l e (c:r)
+insertAfter e (Zipper l c r) = Zipper (c:l) e r
 
 replace :: a -> Zipper a -> Zipper a
 replace _ Zip = error "Can't replace cursor of empty zipper"
