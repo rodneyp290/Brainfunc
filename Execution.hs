@@ -1,6 +1,7 @@
 module Execution where
 
 import Data.Char (ord,chr)
+import Data.Bool (bool)
 
 import Zipper
 import Tape
@@ -62,9 +63,13 @@ instruction Write code tape =
     x <- getChar
     pure (code, writeReg (toInteger (ord x)) tape)
 instruction Open code tape =
-  pure (openForward code, tape)
+  pure (bool (code, tape) (openForward code, tape) 
+            ((readReg tape) == 0)
+       )
 instruction Close code tape =
-  pure (closeBackward code, tape)
+  pure (bool (code, tape) (closeBackward code, tape)
+            ((readReg tape) /= 0)
+       )
 
 process :: Code -> Tape -> IO (Tape)
 process code tape =
