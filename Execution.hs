@@ -5,7 +5,7 @@ import Tape
 data Term =
   Incr | Decr | Next | Prev | Read | Write | Open | Close
 
-Type Code = Zipper Term
+type Code = Zipper Term
 
 closeBackward :: Code -> Code
 closeBackward code = backward 0 code

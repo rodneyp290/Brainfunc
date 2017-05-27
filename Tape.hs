@@ -2,7 +2,7 @@
 module Tape where
 import Zipper
 
-Type Tape = Zipper Integer
+type Tape = Zipper Integer
 
 alterReg :: Tape -> Tape
 alterReg f tape  =
