@@ -4,17 +4,18 @@ import Zipper
 
 type Tape = Zipper Integer
 
-alterReg :: (a -> Integer) -> Tape -> Tape
-alterReg f tape  =
-  case cursorSafe tape of
-    Just cursor -> replace (f cursor) tape
-    Nothing -> error "test"
+alterReg :: (Integer -> Integer) -> Tape -> Tape
+alterReg f tape  = replace (f (readReg tape)) tape
 
 incrReg :: Tape -> Tape
-incrReg t = alterReg (+1) t
+incrReg t = alterReg incr t
+  where incr :: Integer -> Integer
+        incr n = n - 1
 
 decrReg :: Tape -> Tape
-decrReg t = alterReg (-1) t
+decrReg t = alterReg decr t
+  where decr :: Integer -> Integer
+        decr n = n - 1
 
 nextReg :: Tape -> Tape
 nextReg tape =
