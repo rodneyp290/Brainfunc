@@ -1,5 +1,7 @@
 module Main where
 
+import System.Environment
+
 import Zipper
 import Execution
 
@@ -20,8 +22,13 @@ sourceToList source = foldr charToTermList [] source
 main :: IO ()
 main =
   do
-    --sourceFile <- head getArgs
-    source <- readFile "./hello.bf" --filepath
-    _ <- process (zipperFromList (sourceToList source)) (zipper 0)
-    pure ()
-    
+    args <- getArgs
+    program <- getProgName
+    case length args of
+        0 -> error ("Usage: " ++ program ++ " <source.hs>")
+        _ ->
+          do
+            let sourceFile = head args
+            source <- readFile sourceFile
+            _ <- process (zipperFromList (sourceToList source)) (zipper 0)
+            pure ()
