@@ -62,8 +62,6 @@ instruction Write code tape =
     x <- getChar
     pure (code, writeReg (toInteger (ord x)) tape)
 instruction Open code tape =
-  pure (closeBackward 0 tape )
-instruction Open code tape =
   pure (closeBackward Code, tape)
 instruction Close code tape =
   pure (closebackward Code, tape)
