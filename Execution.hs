@@ -13,38 +13,38 @@ type Code = Zipper Term
 openForward :: Code -> Code
 openForward code = forward 0 (Just code)
   where forward :: Integer -> (Maybe Code) -> Code
-        forward 0 (Just code) =
-          case cursorSafe code of
-            Just Close -> code
-            Just Open -> forward 1 (nextSafe code)
-            Just _ -> forward 0 (nextSafe code)
+        forward 0 (Just code') =
+          case cursorSafe code' of
+            Just Close -> code'
+            Just Open -> forward 1 (nextSafe code')
+            Just _ -> forward 0 (nextSafe code')
             Nothing -> error "You've been brainfunced!"
-        forward n (Just code) =
-          case cursorSafe code of
-            Just Close -> forward (n-1) (nextSafe code)
-            Just Open -> forward (n+1) (nextSafe code)
-            Just _ -> forward n (nextSafe code)
+        forward n (Just code') =
+          case cursorSafe code' of
+            Just Close -> forward (n-1) (nextSafe code')
+            Just Open -> forward (n+1) (nextSafe code')
+            Just _ -> forward n (nextSafe code')
             Nothing -> error "You've been brainfunced!"
-        forward n Nothing =
+        forward _ Nothing =
           error "You've been brainfunced!"
 
 
 closeBackward :: Code -> Code
 closeBackward code = backward 0 (Just code)
   where backward :: Integer -> (Maybe Code) -> Code
-        backward 0 (Just code) =
-          case cursorSafe code of
-            Just Close -> backward 1 (nextSafe code)
-            Just Open -> code
-            Just _ -> backward 0 (nextSafe code)
+        backward 0 (Just code') =
+          case cursorSafe code' of
+            Just Close -> backward 1 (nextSafe code')
+            Just Open -> code'
+            Just _ -> backward 0 (nextSafe code')
             Nothing -> error "You've been brainfunced!"
-        backward n (Just code) =
-          case cursorSafe code of
-            Just Close -> backward (n+1) (nextSafe code)
-            Just Open -> backward (n-1) (nextSafe code)
-            Just _ -> backward n (nextSafe code)
+        backward n (Just code') =
+          case cursorSafe code' of
+            Just Close -> backward (n+1) (nextSafe code')
+            Just Open -> backward (n-1) (nextSafe code')
+            Just _ -> backward n (nextSafe code')
             Nothing -> error "You've been brainfunced!"
-        backward n Nothing =
+        backward _ Nothing =
           error "You've been brainfunced!"
 
 instruction :: Term -> Code -> Tape -> IO (Code, Tape)
