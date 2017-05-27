@@ -28,7 +28,7 @@ insertBefore :: a -> Zipper a -> Zipper a
 insertBefore e Zip = zipper e
 insertBefore e (Zipper l c r) = Zipper (c:l) e r
 
-insertAfter :: Zipper a -> Zipper a
+insertAfter :: a -> Zipper a -> Zipper a
 insertAfter e Zip = zipper e
 insertAfter e (Zipper l c r) = Zipper l e (c:r)
 
