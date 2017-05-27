@@ -74,4 +74,4 @@ process code tape =
       (code', tape') <- instruction term code tape
       case (nextSafe code') of
         Nothing -> pure (tape)
-        Just code'' -> process code'' tape
+        Just code'' -> process code'' tape'
