@@ -25,5 +25,6 @@ main =
   do
     --sourceFile <- head getArgs
     source <- readFile "./hello.bf" --filepath
-    process (zipperFromList (sourceToList source)) zipper 0
+    _ <- process (zipperFromList (sourceToList source)) (zipper 0)
+    pure ()
     
