@@ -62,14 +62,14 @@ instruction Write code tape =
     x <- getChar
     pure (code, writeReg (toInteger (ord x)) tape)
 instruction Open code tape =
-  pure (closeBackward Code, tape)
+  pure (closeBackward code, tape)
 instruction Close code tape =
-  pure (closebackward Code, tape)
+  pure (closeBackward code, tape)
 
 process :: Code -> Tape -> Tape
 process code tape =
   case cursorSafe code of
-    Nothing -> Tape
+    Nothing -> tape
     Just term -> do
       (code', tape') <- instruction term code tape
       case (nextSafe code') of
