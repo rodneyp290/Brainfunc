@@ -11,7 +11,7 @@ data Term =
 type Code = Zipper Term
 
 openForward :: Code -> Code
-openForward code = forward 0 (Just code)
+openForward code = forward 0 (nextSafe code)
   where forward :: Integer -> (Maybe Code) -> Code
         forward 0 (Just code') =
           case cursorSafe code' of
@@ -62,7 +62,7 @@ instruction Write code tape =
     x <- getChar
     pure (code, writeReg (toInteger (ord x)) tape)
 instruction Open code tape =
-  pure (closeBackward code, tape)
+  pure (openForward code, tape)
 instruction Close code tape =
   pure (closeBackward code, tape)
 
