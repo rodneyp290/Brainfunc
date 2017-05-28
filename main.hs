@@ -25,7 +25,7 @@ main =
     args <- getArgs
     program <- getProgName
     case length args of
-        0 -> error ("Usage: " ++ program ++ " <source.hs>")
+        0 -> putStrLn ("Usage: " ++ program ++ " <source.hs>")
         _ ->
           do
             let sourceFile = head args
