@@ -57,6 +57,7 @@ instruction Prev code tape = pure (code, prevReg tape)
 instruction Read code tape =
   do
     putChar (chr ((fromInteger (readReg tape))::Int))
+    hFlush stdout
     pure (code, tape)
 instruction Write code tape =
   do
